@@ -28,7 +28,7 @@ parser.add_argument('--freeze-interval', type=int, default=200, help=('Interval 
 parser.add_argument('--update-frequency', type=int, default=4, help=('Number of actions before each SGD update.'))
 parser.add_argument('--termination-reg', type=float, default=0.01, help=('Regularization to decrease termination prob.'))
 parser.add_argument('--entropy-reg', type=float, default=0.01, help=('Regularization to increase policy entropy.'))
-parser.add_argument('--num-options', type=int, default=2, help=('Number of options to create.'))
+parser.add_argument('--num-options', type=int, default=4, help=('Number of options to create.'))
 parser.add_argument('--temp', type=float, default=1, help='Action distribution softmax tempurature param.')
 
 parser.add_argument('--max_steps_ep', type=int, default=18000, help='number of maximum steps per episode.')
