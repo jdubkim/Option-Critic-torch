@@ -7,8 +7,7 @@ import torch
 def make_env(env_name):
     env = gym.make(env_name)
     if 'MiniGrid' in env_name:
-        env = gym_minigrid.wrappers.ImgObsWrapper(env)
-
+        env = gym_minigrid.wrappers.RGBImgPartialObsWrapper(env)
     return env
 
 

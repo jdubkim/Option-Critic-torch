@@ -35,19 +35,30 @@ class OptionCritic(nn.Module):
         self.eps_test  = eps_test
         self.num_steps = 0
         
+        # self.features = nn.Sequential(
+        #     nn.Conv2d(self.in_channels, 16, kernel_size=3, stride=1),
+        #     nn.ReLU(),
+        #     nn.Conv2d(16, 32, kernel_size=3, stride=1),
+        #     nn.ReLU(),
+        #     nn.Conv2d(32, 64, kernel_size=3, stride=1),
+        #     nn.ReLU(),
+        #     nn.modules.Flatten(),
+        # )
         self.features = nn.Sequential(
-            nn.Conv2d(self.in_channels, 16, kernel_size=3, stride=1),
+            nn.Conv2d(self.in_channels, 32, kernel_size=4, stride=2),
             nn.ReLU(),
-            nn.Conv2d(16, 32, kernel_size=3, stride=1),
+            nn.Conv2d(32, 64, kernel_size=4, stride=2),
             nn.ReLU(),
-            nn.Conv2d(32, 64, kernel_size=3, stride=1),
+            nn.Conv2d(64, 128, kernel_size=4, stride=2),
             nn.ReLU(),
-            nn.modules.Flatten(),
+            nn.Conv2d(128, 256, kernel_size=4, stride=2),
+            nn.ReLU(),
+            nn.Flatten(),
         )
 
-        self.Q = nn.Linear(64, num_options) # Policy-Over-Options
-        self.terminations = nn.Linear(64, num_options) # Option-Termination
-        self.options_W = nn.Parameter(torch.zeros(num_options, 64, num_actions))
+        self.Q = nn.Linear(256, num_options) # Policy-Over-Options
+        self.terminations = nn.Linear(256, num_options) # Option-Termination
+        self.options_W = nn.Parameter(torch.zeros(num_options, 256, num_actions))
         self.options_b = nn.Parameter(torch.zeros(num_options, num_actions))
 
         self.to(device)
